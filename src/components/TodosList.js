@@ -7,11 +7,11 @@ class TodosList extends React.Component {
   }
 
   render() {
-    const { todos } = this.props;
+    const { todos, handleChange } = this.props;
     return (
       <ul>
         {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} />
+          <TodoItem key={todo.id} todo={todo} handleChange={handleChange} />
         ))}
       </ul>
     );
