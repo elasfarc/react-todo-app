@@ -45,8 +45,9 @@ class InputTodo extends React.Component {
         ) : null}
         <form className="form-container" onSubmit={this.handleSubmit}>
           <div className="input-text">
-            <label htmlFor="addItemInput">Add an item</label>
+            <label htmlFor="addItemInput"></label>
             <input
+              className="input-text"
               id="addItemInput"
               name="title"
               type="text"

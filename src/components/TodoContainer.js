@@ -15,13 +15,16 @@ export default class TodoContainer extends React.Component {
     this.addItem = this.addItem.bind(this);
     this.editItem = this.editItem.bind(this);
   }
-  async componentDidMount() {
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/todos?_limit=10"
-    );
-    const todos = await response.json();
-    console.log(todos);
-    this.setState({ todos });
+  componentDidMount() {
+    const temp = localStorage.getItem("todos");
+    const todos = JSON.parse(temp);
+    !!todos && this.setState({ todos });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.todos !== this.state.todos) {
+      const temp = JSON.stringify(this.state.todos);
+      localStorage.setItem("todos", temp);
+    }
   }
   handleChange(itemID) {
     // const { todos } = this.state;
