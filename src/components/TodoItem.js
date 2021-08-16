@@ -6,7 +6,7 @@ class TodoItem extends React.Component {
   }
 
   render() {
-    const { todo, handleChange } = this.props;
+    const { todo, handleChange, handleDelete } = this.props;
     return (
       <li>
         <input
@@ -15,6 +15,9 @@ class TodoItem extends React.Component {
           onChange={() => handleChange(todo.id)}
         ></input>
         {todo.title}
+        <button type="button" onClick={() => handleDelete(todo.id)}>
+          Delete
+        </button>
       </li>
     );
   }

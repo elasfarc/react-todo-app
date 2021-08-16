@@ -25,6 +25,7 @@ export default class TodoContainer extends React.Component {
       ],
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
   handleChange(itemID) {
     // const { todos } = this.state;
@@ -44,12 +45,22 @@ export default class TodoContainer extends React.Component {
       }),
     }));
   }
+  handleDelete(itemID) {
+    this.setState((state) => {
+      let todos = state.todos.filter((todo) => todo.id !== itemID);
+      return { todos };
+    });
+  }
   render() {
     const { todos } = this.state;
     return (
       <>
         <Header />
-        <TodosList todos={todos} handleChange={this.handleChange} />
+        <TodosList
+          todos={todos}
+          handleChange={this.handleChange}
+          handleDelete={this.handleDelete}
+        />
       </>
     );
   }
