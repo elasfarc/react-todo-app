@@ -18,8 +18,6 @@ class InputTodo extends React.Component {
     event.preventDefault();
     const { addItem } = this.props;
     console.log(title, !!title.trim());
-    // (!title.trim() && this.setState({ error: "ERRRRRR" })) ||
-    //   (addItem(title) && this.setState({ todo: { title: "" } }));
     if (title.trim()) {
       addItem(title);
       this.setState({ todo: { title: "" }, error: null });
@@ -39,20 +37,28 @@ class InputTodo extends React.Component {
       error,
     } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        {error ? <p>{error}</p> : null}
-        <div>
-          <label htmlFor="addItemInput">Add an item</label>
-          <input
-            id="addItemInput"
-            name="title"
-            type="text"
-            value={title}
-            onChange={this.handleChange}
-          ></input>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+      <>
+        {error ? (
+          <p style={{ color: "red", marginBottom: "1em", paddingLeft: "4em" }}>
+            {error}
+          </p>
+        ) : null}
+        <form className="form-container" onSubmit={this.handleSubmit}>
+          <div className="input-text">
+            <label htmlFor="addItemInput">Add an item</label>
+            <input
+              id="addItemInput"
+              name="title"
+              type="text"
+              value={title}
+              onChange={this.handleChange}
+            ></input>
+          </div>
+          <button className="input-submit" type="submit">
+            Submit
+          </button>
+        </form>
+      </>
     );
   }
 }
