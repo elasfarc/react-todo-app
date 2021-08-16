@@ -8,28 +8,20 @@ export default class TodoContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [
-        {
-          id: uuidv4(),
-          title: "Setup development environment",
-          completed: true,
-        },
-        {
-          id: uuidv4(),
-          title: "Develop website and add content",
-          completed: false,
-        },
-        {
-          id: uuidv4(),
-          title: "Deploy to live server",
-          completed: false,
-        },
-      ],
+      todos: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.addItem = this.addItem.bind(this);
     this.editItem = this.editItem.bind(this);
+  }
+  async componentDidMount() {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/todos?_limit=10"
+    );
+    const todos = await response.json();
+    console.log(todos);
+    this.setState({ todos });
   }
   handleChange(itemID) {
     // const { todos } = this.state;

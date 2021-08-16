@@ -8,6 +8,7 @@ class TodosList extends React.Component {
 
   render() {
     const { todos, handleChange, handleDelete, editItem } = this.props;
+
     return (
       <ul>
         {todos.map((todo) => (
