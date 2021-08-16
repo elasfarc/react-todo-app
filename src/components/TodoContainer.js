@@ -29,6 +29,7 @@ export default class TodoContainer extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.editItem = this.editItem.bind(this);
   }
   handleChange(itemID) {
     // const { todos } = this.state;
@@ -58,6 +59,16 @@ export default class TodoContainer extends React.Component {
     const newItem = { id: uuidv4(), title: data, completed: false };
     this.setState((state) => ({ todos: [...state.todos, newItem] }));
   }
+  editItem(itemID, updatedMsg) {
+    this.setState((state) => {
+      return {
+        todos: state.todos.map((todo) => {
+          if (todo.id === itemID) todo.title = updatedMsg;
+          return todo;
+        }),
+      };
+    });
+  }
   render() {
     const { todos } = this.state;
     return (
@@ -69,6 +80,7 @@ export default class TodoContainer extends React.Component {
             todos={todos}
             handleChange={this.handleChange}
             handleDelete={this.handleDelete}
+            editItem={this.editItem}
           />
         </div>
       </div>
